@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  ui:
+    build: ./ui
+    ports:
+      - 8502:8502
+    networks:
+      - global_electronics_eda_network
+    volumes:
+      - ./ui/app:/app
+    depends_on:
+    - sql
+    environment:
+    - OPEN_AI_API_KEY="3e123123"
+
+  sql:    
+    build: ./sql
+    ports:
+      - 3306:3306
+    networks:
+      - global_electronics_eda_network
+    
+networks:
+  global_electronics_eda_network:
+    driver: bridge
+    
